@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getMovie, search } from './api';
 import './App.css';
 
 class App extends Component {
@@ -165,6 +166,13 @@ class App extends Component {
         Response: "True"
       },
     ],
+  }
+
+  componentDidMount() {
+    // test api
+    // getMovie('tt3896198').then(data => {
+    //   debugger;
+    // })
   }
 
   render() {
