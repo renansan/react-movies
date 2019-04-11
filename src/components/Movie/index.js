@@ -7,9 +7,12 @@ class Movie extends Component {
     movie: {},
   }
 
-  componentDidMount() {
+  fetchMovie = () => {
     const { history, match } = this.props;
+    const { movie } = this.state;
     const movieId = match.params.id;
+
+    if (movie && movie.imdbID === movieId) return;
 
     getMovie(movieId).then(movie => {
       if (movie.Response === 'False') {
@@ -23,6 +26,14 @@ class Movie extends Component {
         this.setState({ movie });
       }
     })
+  }
+
+  componentDidMount() {
+    this.fetchMovie();
+  }
+
+  componentDidUpdate() {
+    this.fetchMovie();
   }
 
   render() {
