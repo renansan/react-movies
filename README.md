@@ -9,6 +9,8 @@ After installing all dependencies, run `npm start` to see it in action.
 ## Todos
 List of features to improve the app:
 * Add Redux to control app's state;
+* Add propTypes;
+* Move Header, Search and CardList into separated components;
 * Add tests for all components;
 * Use Styled Components for styling;
 * Allow users to save movies in a custom moviesList using localStorage;

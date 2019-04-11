@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import styled from 'styled-components';
 import { getMovie } from '../../api';
 
 class Movie extends Component {
@@ -57,46 +58,89 @@ class Movie extends Component {
     ];
 
     return Object.keys(movie).length ? (
-      <div className="post-content">
-        <article className="post-article">
-          <h1>{movie.Title}</h1>
-          <p>{movie.Plot}</p>
+      <Post>
+        <Article>
+          <Title>{movie.Title}</Title>
+          <Paragraph>{movie.Plot}</Paragraph>
 
           {contentMovieData.length && movie && contentMovieData.map((term, idx) => {
             return movie[term] ? (
               <div key={`content-post-data-${movie.imdbID}-${idx}`}>
-                <h2>{term}</h2>
-                <p>{movie[term]}</p>
+                <Title2>{term}</Title2>
+                <Paragraph>{movie[term]}</Paragraph>
               </div>
             ) : ''
           })}
 
-        </article>
-        <aside className="post-aside">
-          <figure className="post-image">
+        </Article>
+        <Aside>
+          <Figure>
             <img src={movie.Poster} alt=""/>
-          </figure>
+          </Figure>
 
           {asideMovieData.length && movie ? (
-            <dl className="post-data">
+            <Metadata>
               {asideMovieData.map((term, idx) => {
                 return movie[term] ? (
-                  <div className="post-data-item" key={`aside-post-data-${movie.imdbID}-${idx}`}>
-                    <dt className="post-data-title">{term}</dt>
-                    <dd className="post-data-description">{movie[term]}</dd>
-                  </div>
+                  <MetadataItem key={`aside-post-data-${movie.imdbID}-${idx}`}>
+                    <MetadataTitle>{term}</MetadataTitle>
+                    <MetadataDescription>{movie[term]}</MetadataDescription>
+                  </MetadataItem>
                 ) : ''
               })}
-            </dl>
+            </Metadata>
           ) : (
             <span>no movie</span>
           )}
-        </aside>
-      </div>
+        </Aside>
+      </Post>
     ) : (
       <span>No movie data</span>
     )
   }
 }
+
+const Post = styled.div`
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  padding: 30px 0;
+`
+const Metadata = styled.dl`
+  margin-bottom: 15px;
+`
+const MetadataItem = styled.div`
+  margin-bottom: 15px;
+`
+const MetadataTitle = styled.dt`
+  display: block;
+  font-weight: 500;
+`
+const MetadataDescription = styled.dd`
+  margin-bottom: 15px;
+`
+const Article = styled.article`
+  padding: 15px;
+  flex: 1 1 auto;
+`
+const Aside = styled.article`
+  flex: 1 0 auto;
+  max-width: 360px;
+  order: -1;
+  padding: 15px;
+  width: 100%;
+`
+const Figure = styled.article`
+  margin-bottom: 15px;
+`
+const Title = styled.h1`
+  font-size: 32px;
+`
+const Title2 = styled.h2`
+  font-size: 24px;
+`
+const Paragraph = styled.p`
+  margin-bottom: 15px;
+`
 
 export default withRouter(Movie);

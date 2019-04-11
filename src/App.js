@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import styled from 'styled-components';
 import { searchMovie } from './api';
 import Modal from './components/Modal';
 import Loading from './components/Loading';
@@ -112,5 +113,11 @@ class App extends Component {
     );
   }
 }
+
+const Section = styled.section``
+const Header = styled.header``
+const CardList = styled.div``
+const Search = styled.form``
+
 
 export default withRouter(App);
