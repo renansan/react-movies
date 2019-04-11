@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { getMovie, search } from './api';
+import { Switch, Route, Link } from 'react-router-dom';
+import { search } from './api';
+import Modal from './components/Modal';
+import Loading from './components/Loading';
+import Movie from './components/Movie';
 import './App.css';
 
 class App extends Component {
@@ -177,29 +181,11 @@ class App extends Component {
 
   render() {
     const { movies } = this.state;
-    const movie = movies[0];
-    const asideMovieData = [
-      "Genre",
-      "Runtime",
-      "Year",
-      "Released",
-      "Rated",
-      "imdbRating",
-      "Language",
-      "Country",
-      "Website",
-    ];
-    const contentMovieData = [
-      "Writer",
-      "Actors",
-      "Director",
-      "Production",
-    ];
 
     return (
       <div className="app">
         <header className="header">
-          <div className="logo">React Movies</div>
+          <Link to="/" className="logo">React Movies</Link>
           <input
             className="search-input"
             type="search"
@@ -226,7 +212,7 @@ class App extends Component {
                       </span>
                     </div>
                     <div className="card-description"></div>
-                    <button type="button" className="btn card-button">See details</button>
+                    <Link to={`/movie/${'tt3896198'}`} className="btn card-button">See details</Link>
                   </article>
                 </div>
               ))}
@@ -236,44 +222,12 @@ class App extends Component {
           )}
         </section>
 
-        <section className="movie-details">
-          <div className="post-content">
-            <article className="post-article">
-              <h1>{movie.Title}</h1>
-              <p>{movie.Plot}</p>
+        <Route path="/movie/:id" render={props => (
+          <Modal>
+              <Movie />
+          </Modal>
+        )}/>
 
-              {contentMovieData.length && movie && contentMovieData.map((term, idx) => {
-                return movie[term] ? (
-                  <div key={`content-post-data-${movie.imdbID}-${idx}`}>
-                    <h2>{term}</h2>
-                    <p>{movie[term]}</p>
-                  </div>
-                ) : ''
-              })}
-
-            </article>
-            <aside className="post-aside">
-              <figure className="post-image">
-                <img src={movie.Poster} alt=""/>
-              </figure>
-
-              {asideMovieData.length && movie ? (
-                <dl className="post-data">
-                  {asideMovieData.map((term, idx) => {
-                    return movie[term] ? (
-                      <div className="post-data-item" key={`aside-post-data-${movie.imdbID}-${idx}`}>
-                        <dt className="post-data-title">{term}</dt>
-                        <dd className="post-data-description">{movie[term]}</dd>
-                      </div>
-                    ) : ''
-                  })}
-                </dl>
-              ) : (
-                <span>no movie</span>
-              )}
-            </aside>
-          </div>
-        </section>
       </div>
     );
   }
