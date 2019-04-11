@@ -6,6 +6,15 @@ An API Key is required from REACT_APP_API_KEY environment variable. You can [cre
 
 After installing all dependencies, run `npm start` to see it in action.
 
+## Todos
+List of features to improve the app:
+* Add Redux to control app's state;
+* Add tests for all components;
+* Use Styled Components for styling;
+* Allow users to save movies in a custom moviesList using localStorage;
+* Allow users to login and save moviesList in a server database using Firebase;
+* Eject from CRA and optmize webpack;
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
