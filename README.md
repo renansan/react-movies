@@ -1,3 +1,13 @@
+# React Movies
+A React app to retrieve movie data from OMDB api.
+
+## Usage
+An API Key is required from REACT_APP_API_KEY environment variable. You can [create your own free API Key](https://www.omdbapi.com/apikey.aspx) on OMDb website and set it in a `.env` file in the app root.
+
+After installing all dependencies, run `npm start` to see it in action.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
