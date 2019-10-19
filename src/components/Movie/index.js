@@ -11,9 +11,11 @@ class Movie extends Component {
   fetchMovie = () => {
     const { history, match } = this.props;
     const { movie } = this.state;
-    const movieId = match.params.id;
+    const movieId = match && match.params && match.params.id;
 
-    if (movie && movie.imdbID === movieId) return;
+    if (movieId && movie && movie.imdbID === movieId) return;
+
+    if (!movieId) return;
 
     getMovie(movieId).then(movie => {
       if (movie.Response === 'False') {
@@ -100,7 +102,7 @@ class Movie extends Component {
   }
 }
 
-const Post = styled.div`
+export const Post = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: flex-start;
@@ -133,13 +135,13 @@ const Aside = styled.article`
 const Figure = styled.article`
   margin-bottom: 15px;
 `
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: 32px;
 `
 const Title2 = styled.h2`
   font-size: 24px;
 `
-const Paragraph = styled.p`
+export const Paragraph = styled.p`
   margin-bottom: 15px;
 `
 

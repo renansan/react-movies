@@ -51,7 +51,6 @@ const Modal = (props) => {
     <ModalBase>
       <ModalOverlay onClick={props.closeModal}></ModalOverlay>
       <ModalContainer>
-        <button>test</button>
         <CloseButton type="button" onClick={props.closeModal}>x</CloseButton>
         {props.children}
       </ModalContainer>
