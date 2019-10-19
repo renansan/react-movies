@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { searchMovie } from './api';
 import Modal from './components/Modal';
 import Loading from './components/Loading';
 import Movie from './components/Movie';
+import SearchForm from './components/SearchForm';
+import CardList from './components/CardList';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +17,11 @@ class App extends Component {
     movies: [],
   }
 
+  /**
+   * [handleSearchChange description]
+   * @param  {Object} ev input's change event
+   * @return {Object}    updated state
+   */
   handleSearchChange = ev => this.setState({ search: ev.target.value });
 
   handleSearchSubmit = (ev) => {
@@ -52,41 +59,21 @@ class App extends Component {
 
     return (
       <div className="app">
+        <GlobalStyle />
         <header className="header">
           <Link to="/" className="logo">React Movies</Link>
-          <form className="search-form" onSubmit={this.handleSearchSubmit}>
-            <input
-              className="search-input"
-              type="search"
-              onChange={this.handleSearchChange}
-              placeholder="type some movie title"
-              value={search}
-            />
-          <button className="btn search-submit">Search</button>
-          </form>
+          <SearchForm
+            submit={this.handleSearchSubmit}
+            change={this.handleSearchChange}
+            value={search}
+          />
         </header>
 
         {!isMovieSingle && (
           <section className="movies-list">
             {loading && (<Loading />)}
             {movies.length ? (
-              <div className="cards-list">
-                {movies.map((movie, idx) => (
-                  <div key={`movie-item-${movie.imdbID}-${idx}`} className="cards-item">
-                    <article className="card">
-                      <figure className="card-image">
-                        <img src={movie.Poster} alt=""/>
-                      </figure>
-                      <h2 className="card-title">{movie.Title}</h2>
-                      <div className="card-metadata">
-                        <b>Year:</b> {movie.Year}
-                      </div>
-                      <div className="card-description"></div>
-                      <Link to={`/movie/${movie.imdbID}`} className="btn card-button">See details</Link>
-                    </article>
-                  </div>
-                ))}
-              </div>
+              <CardList list={movies} />
             ) : (
               <span>{searchQuery.length ? (
                 <span>No movies found for the term <b>{searchQuery}</b></span>
@@ -114,9 +101,14 @@ class App extends Component {
   }
 }
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+`
 const Section = styled.section``
 const Header = styled.header``
-const CardList = styled.div``
+const MovieList = styled.div``
 const Search = styled.form``
 
 
