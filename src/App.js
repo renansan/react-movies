@@ -18,26 +18,46 @@ class App extends Component {
   }
 
   /**
-   * [handleSearchChange description]
+   * Handle search input change
    * @param  {Object} ev input's change event
    * @return {Object}    updated state
    */
   handleSearchChange = ev => this.setState({ search: ev.target.value });
 
+  /**
+   * Handle search form submit
+   * @param  {Object} ev form's submit event
+   * @return {Object}    updated state
+   */
   handleSearchSubmit = (ev) => {
     const { search } = this.state;
     const { history } = this.props;
 
+    // prevent form's default submit
     ev.preventDefault();
 
+    // push to root path
     history.push('/');
 
+    // Update state
     this.setState({ searchQuery: search, loading: true }, () => {
+      // search for movies with the query
       searchMovie(search).then(data => {
         const movies = Array.isArray(data.results) ? data.results : [];
         this.setState({ movies, loading: false });
       })
     });
+  }
+
+  /**
+   * Close Modal
+   * @param  {Object} ev Modal's close events
+   */
+  onCloseModal = (ev) => {
+    const { history } = this.props;
+    ev.stopPropagation();
+    ev.nativeEvent.stopImmediatePropagation();
+    history.push('/');
   }
 
   componentDidMount() {
@@ -86,7 +106,7 @@ class App extends Component {
 
         <Route path="/movie/:id" render={props => {
           return (searchQuery) ? (
-            <Modal>
+            <Modal closeModal={this.onCloseModal}>
               <Movie />
             </Modal>
           ) : (

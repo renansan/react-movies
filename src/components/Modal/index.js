@@ -34,7 +34,7 @@ const ModalContainer = styled.div`
   width: 100%;
   z-index: 300;
 `
-const CloseButton = styled.button`
+export const CloseButton = styled.button`
   background-color: transparent;
   border: 0;
   color: #000;
@@ -47,19 +47,12 @@ const CloseButton = styled.button`
 `
 
 const Modal = (props) => {
-
-  const closeModal = (ev) => {
-    const { history } = props;
-    ev.stopPropagation();
-    ev.nativeEvent.stopImmediatePropagation();
-    history.push('/');
-  }
-
   return (
     <ModalBase>
-      <ModalOverlay onClick={closeModal}></ModalOverlay>
+      <ModalOverlay onClick={props.closeModal}></ModalOverlay>
       <ModalContainer>
-        <CloseButton type="button" onClick={closeModal}>x</CloseButton>
+        <button>test</button>
+        <CloseButton type="button" onClick={props.closeModal}>x</CloseButton>
         {props.children}
       </ModalContainer>
     </ModalBase>
