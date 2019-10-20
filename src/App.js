@@ -8,7 +8,6 @@ import Loading from './components/Loading';
 import Movie from './components/Movie';
 import SearchForm from './components/SearchForm';
 import CardList from './components/CardList';
-import './App.css';
 
 class App extends Component {
   state = {
@@ -80,17 +79,17 @@ class App extends Component {
     return (
       <div className="app">
         <GlobalStyle />
-        <header className="header">
-          <Link to="/" className="logo">React Movies</Link>
+        <Header>
+          <Logo to="/">React Movies</Logo>
           <SearchForm
             submit={this.handleSearchSubmit}
             change={this.handleSearchChange}
             value={search}
           />
-        </header>
+        </Header>
 
         {!isMovieSingle && (
-          <section className="movies-list">
+          <Section className="movies-list">
             {loading && (<Loading />)}
             {movies.length ? (
               <CardList list={movies} />
@@ -101,7 +100,7 @@ class App extends Component {
                 <span>Search for a movie</span>
               )}</span>
             )}
-          </section>
+          </Section>
         )}
 
         <Route path="/movie/:id" render={props => {
@@ -110,9 +109,9 @@ class App extends Component {
               <Movie />
             </Modal>
           ) : (
-            <section className="movie-details">
+            <Section className="movie-details">
               <Movie />
-            </section>
+            </Section>
           )}}
         />
 
@@ -122,14 +121,43 @@ class App extends Component {
 }
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
+    background-color: #fafafa;
     font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+  }
+  section {
+    padding: 30px;
+  }
+  p {
+    margin-bottom: 15px;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  h1, h3, h3 {
+    margin-bottom: 15px;
   }
 `
-const Section = styled.section``
-const Header = styled.header``
-const MovieList = styled.div``
-const Search = styled.form``
-
+const Header = styled.header`
+  align-items: center;
+  background-color: #ededed;
+  display: flex;
+  height: 60px;
+  padding: 15px 30px;
+`
+const Logo = styled(Link)`
+  margin-right: 15px;
+`
+const Section = styled.section`
+  padding: 30px;
+`
 
 export default withRouter(App);

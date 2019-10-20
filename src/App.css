@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -20,8 +20,8 @@ img {
 }
 h1, h3, h3 {
   margin-bottom: 15px;
-}
-.btn {
+} */
+/* .btn {
   background-color: #ededed;
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -35,9 +35,9 @@ h1, h3, h3 {
 .btn:hover {
   background-color: #dedede;
   transition: .3s;
-}
+} */
 
-.header {
+/* .header {
   align-items: center;
   background-color: #ededed;
   display: flex;
@@ -46,10 +46,10 @@ h1, h3, h3 {
 }
 .header .logo {
   margin-right: 15px;
-}
+} */
 
 .search-form {
-  align-items: center;
+  /* align-items: center;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -57,62 +57,62 @@ h1, h3, h3 {
   height: 40px;
   padding-right: 15px;
   position: relative;
-  width: 100%;
+  width: 100%; */
 }
 .search-submit {}
 .search-input {
-  background-color: transparent;
+  /* background-color: transparent;
   border: 0;
   height: 40px;
   line-height: 40px;
   margin-right: 15px;
   padding: 0 15px;
-  width: 100%;
+  width: 100%; */
 }
 
 .cards-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -15px;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* margin: 0 -15px; */
 }
 
 .cards-item {
-  padding: 15px;
-  max-width: 100%;
+  /* padding: 15px;
+  max-width: 100%; */
 }
 
 .card {
-  background-color: #fff;
+  /* background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
   padding: 15px;
-  width: 100%;
+  width: 100%; */
 }
 .card-title {
-  font-size: 20px;
-  margin-bottom: 15px;
+  /* font-size: 20px;
+  margin-bottom: 15px; */
 }
 .card-image {
-  margin: -15px;
-  margin-bottom: 15px;
+  /* margin: -15px;
+  margin-bottom: 15px; */
 }
 .card-image img {
-  width: 100%;
+  /* width: 100%;
   height: 260px;
-  object-fit: cover;
+  object-fit: cover; */
 }
 .card-metadata {
-  align-items: center;
+  /* align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 15px; */
 }
 .card-description {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 .card-button {}
 
-.post-content {
+/* .post-content {
   background-color: #fff;
   display: flex;
   justify-content: flex-start;
@@ -147,9 +147,9 @@ h1, h3, h3 {
 }
 .post-data-description {
   margin-bottom: 15px;
-}
+} */
 
-.modal {
+/* .modal {
   align-items: center;
   display: flex;
   height: 100%;
@@ -190,9 +190,9 @@ h1, h3, h3 {
   z-index: 1;
   color: #000;
   font-size: 30px;
-}
+} */
 
-@media screen and (min-width: 576px) {
+/* @media screen and (min-width: 576px) {
   .cards-item {
     max-width: 50%;
   }
@@ -212,4 +212,4 @@ h1, h3, h3 {
   .cards-item {
     max-width: 20%;
   }
-}
+} */

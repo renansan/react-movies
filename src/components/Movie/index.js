@@ -125,14 +125,14 @@ const Article = styled.article`
   padding: 15px;
   flex: 1 1 auto;
 `
-const Aside = styled.article`
+const Aside = styled.aside`
   flex: 1 0 auto;
   max-width: 360px;
   order: -1;
   padding: 15px;
   width: 100%;
 `
-const Figure = styled.article`
+const Figure = styled.figure`
   margin-bottom: 15px;
 `
 export const Title = styled.h1`

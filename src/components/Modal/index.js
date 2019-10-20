@@ -2,6 +2,18 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 
+const Modal = (props) => {
+  return (
+    <ModalBase>
+      <ModalOverlay onClick={props.closeModal}></ModalOverlay>
+      <ModalContainer>
+        <CloseButton type="button" onClick={props.closeModal}>x</CloseButton>
+        {props.children}
+      </ModalContainer>
+    </ModalBase>
+  )
+}
+
 const ModalBase = styled.div`
   align-items: center;
   display: flex;
@@ -45,17 +57,5 @@ export const CloseButton = styled.button`
   top: 10px;
   z-index: 1;
 `
-
-const Modal = (props) => {
-  return (
-    <ModalBase>
-      <ModalOverlay onClick={props.closeModal}></ModalOverlay>
-      <ModalContainer>
-        <CloseButton type="button" onClick={props.closeModal}>x</CloseButton>
-        {props.children}
-      </ModalContainer>
-    </ModalBase>
-  )
-}
 
 export default withRouter(Modal);

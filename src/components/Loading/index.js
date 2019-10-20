@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const LoadingBase = styled.div`
+const LoadingContainer = styled.div`
   width: 200px;
   margin: 0 auto;
   display: block;
@@ -9,7 +9,7 @@ const LoadingBase = styled.div`
 
 const Loading = () => {
   return (
-    <LoadingBase>
+    <LoadingContainer>
       <svg className='loading-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'
       preserveAspectRatio='xMidYMid'>
         <g transform='translate(20 50)'>
@@ -41,7 +41,7 @@ const Loading = () => {
           </circle>
         </g>
       </svg>
-    </LoadingBase>
+    </LoadingContainer>
   )
 }
 
