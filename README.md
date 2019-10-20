@@ -8,14 +8,14 @@ After installing all dependencies, run `npm start` to see it in action.
 
 ## Todos
 List of features to improve the app:
-* Add Redux to control app's state;
-* Add propTypes;
-* Move Header, Search and CardList into separated components;
-* Add tests for all components;
-* Use Styled Components for styling;
-* Allow users to save movies in a custom moviesList using localStorage;
-* Allow users to login and save moviesList in a server database using Firebase;
-* Eject from CRA and optmize webpack;
+* [ ] Add Redux to control app's state;
+* [x] ~~Add propTypes~~;
+* [x] ~~Move Header, Search and CardList into separated components~~;
+* [x] ~~Add tests for all components~~;
+* [x] ~~Use Styled Components for styling~~;
+* [ ] Allow users to save movies in a custom moviesList using localStorage;
+* [ ] Allow users to login and save moviesList in a server database using Firebase;
+* [ ] Eject from CRA and optmize webpack;
 
 ---
 

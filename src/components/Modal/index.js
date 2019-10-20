@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Modal = (props) => {
@@ -58,4 +58,9 @@ export const CloseButton = styled.button`
   z-index: 1;
 `
 
-export default withRouter(Modal);
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+}
+
+export default Modal;

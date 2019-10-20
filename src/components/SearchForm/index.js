@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const SearchForm = props => {
@@ -53,5 +54,11 @@ const Button = styled.button`
   transition: .3s;
 }
 `
+
+SearchForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+}
 
 export default SearchForm;

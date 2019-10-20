@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { getMovie } from '../../api';
@@ -144,5 +145,10 @@ const Title2 = styled.h2`
 export const Paragraph = styled.p`
   margin-bottom: 15px;
 `
+
+Movie.propTypes = {
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+}
 
 export default withRouter(Movie);

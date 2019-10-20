@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -90,5 +91,8 @@ const Button = styled(Link)`
   transition: .3s;
 }
 `
+CardList.propTypes = {
+  list: PropTypes.array.isRequired,
+}
 
 export default CardList;
