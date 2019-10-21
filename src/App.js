@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import styled, { createGlobalStyle } from 'styled-components';
+import { connect } from 'react-redux';
+import { fetchFavorites } from './redux/actions.js';
 import { searchMovie } from './api';
 import Modal from './components/Modal';
 import Loading from './components/Loading';
@@ -17,15 +19,16 @@ class App extends Component {
     savedMovies: [],
   }
 
-  getSavedMovies = () => {
-    const savedMovies = localStorage.getItem('savedMovies') || '{}';
-    const savedMoviesObj = (typeof savedMovies === 'string') ? JSON.parse(savedMovies) : {};
-    const savedMoviesArr = (savedMoviesObj && Object.keys(savedMoviesObj).length)
-      ? Object.keys(savedMoviesObj).map(key => savedMoviesObj[key]).filter(item => item.isSaved)
+  /**
+   * Fetch Movies from localStorage and set to savedMovies state
+   */
+  fetchSavedMovies = () => {
+    const { favorites } = this.props;
+    const savedMovies = (favorites && Object.keys(favorites).length)
+      ? Object.keys(favorites).map(key => favorites[key]).filter(item => item.isSaved)
       : []
 
-    // debugger;
-    this.setState({ savedMovies: savedMoviesArr });
+    this.setState({ savedMovies: savedMovies });
   }
 
   /**
@@ -72,21 +75,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getSavedMovies();
+    this.props.getFavorites(this.fetchSavedMovies);
     // test api
     // getMovie('tt3896198').then(data => {
     //   debugger;
     // })
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (
-  //     Array.isArray(prevProps.savedMovies)
-  //     && Array.isArray(this.state.savedMovies)
-  //     && this.state.savedMovies.length !== prevProps.savedMovies) {
-  //     this.getSavedMovies();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    const favorites = JSON.stringify(this.props.favorites);
+    const prevFavorites = JSON.stringify(prevProps.favorites);
+    if (favorites !== prevFavorites) {
+      this.fetchSavedMovies();
+    }
+  }
 
   render() {
     const {
@@ -190,4 +192,14 @@ const Section = styled.section`
   padding: 30px;
 `
 
-export default withRouter(App);
+const mapStateToProps = ({ favorites }) => {
+  return { favorites }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getFavorites: () => dispatch(fetchFavorites()),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

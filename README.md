@@ -8,7 +8,7 @@ After installing all dependencies, run `npm start` to see it in action.
 
 ## Todos
 List of features to improve the app:
-* [ ] Add Redux to control app's state;
+* [x] ~~Add Redux to control app's state~~;
 * [x] ~~Add propTypes~~;
 * [x] ~~Move Header, Search and CardList into separated components~~;
 * [x] ~~Add tests for all components~~;

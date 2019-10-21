@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateFavorite } from '../../redux/actions.js';
 import styled from 'styled-components';
 
 class Favorite extends Component {
@@ -14,33 +16,35 @@ class Favorite extends Component {
     savedMovies: {},
   }
 
-  getSavedMovies = () => {
-    const savedMovies = localStorage.getItem('savedMovies') || '{}';
-    return (typeof savedMovies === 'string') ? JSON.parse(savedMovies) : {};
-  }
-
+  /**
+   * Update movie on storage.
+   */
   updateMovieData = () => {
     const { isSaved } = this.state;
     const { movie } = this.props;
     const movieId = movie.imdbID;
     if (typeof movieId === 'string') {
-      const moviesData = this.getSavedMovies();
-      const newMovieData = moviesData;
-      newMovieData[movieId] = {
-        ...movie,
+      this.props.updateFavorites({
+        movieId,
         isSaved,
-      };
-      localStorage.setItem('savedMovies', JSON.stringify(newMovieData));
+        movieData: movie,
+      }, (data) => {});
     }
   }
 
-  handleInitialState = () => {
-    const { movie } = this.props;
+  /**
+   * Set initial state of movie's isSaved from storage
+   */
+  setInitialState = () => {
+    const { movie, favorites } = this.props;
     const movieId = movie.imdbID;
-    const moviesData = this.getSavedMovies();
-    this.setState({ isSaved: moviesData[movieId] && moviesData[movieId].isSaved });
+    this.setState({ isSaved: favorites[movieId] && favorites[movieId].isSaved });
   }
 
+  /**
+   * Handle clicks on favorite button
+   * @param  {Object} ev button's click event
+   */
   handleFavoriteChange = (ev) => {
     this.setState((prevState => {
       return {
@@ -53,7 +57,7 @@ class Favorite extends Component {
   }
 
   componentDidMount() {
-    this.handleInitialState();
+    this.setInitialState();
   }
 
   render() {
@@ -106,4 +110,14 @@ Favorite.propTypes = {
   movie: PropTypes.object.isRequired,
 }
 
-export default Favorite;
+const mapStateToProps = ({ favorites }) => {
+  return { favorites }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateFavorites: (data, cb) => dispatch(updateFavorite(data, cb)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorite);
