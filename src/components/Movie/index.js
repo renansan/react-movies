@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import { getMovie } from '../../api';
+import Favorite from '../Favorite';
 
 class Movie extends Component {
   state = {
@@ -79,6 +80,9 @@ class Movie extends Component {
         <Aside>
           <Figure>
             <img src={movie.Poster} alt=""/>
+            <StyledFavorite>
+              <Favorite movie={movie} />
+            </StyledFavorite>
           </Figure>
 
           {asideMovieData.length && movie ? (
@@ -133,8 +137,18 @@ const Aside = styled.aside`
   padding: 15px;
   width: 100%;
 `
+const StyledFavorite = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`
 const Figure = styled.figure`
   margin-bottom: 15px;
+  position: relative;
+
+  & > img {
+    width: 100%;
+  }
 `
 export const Title = styled.h1`
   font-size: 32px;

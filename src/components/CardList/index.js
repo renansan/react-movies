@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Favorite from '../Favorite';
 
 const CardList = props => {
   const { list } = props;
@@ -12,6 +13,9 @@ const CardList = props => {
           <Card>
             <Figure>
               <img src={movie.Poster} alt=""/>
+              <StyledFavorite>
+                <Favorite movie={movie} />
+              </StyledFavorite>
             </Figure>
             <Title>{movie.Title}</Title>
             <Metadata>
@@ -59,12 +63,16 @@ const Title = styled.h2`
 const Figure = styled.figure`
   margin: -15px;
   margin-bottom: 15px;
+  position: relative;
 
   & > img {
     width: 100%;
-    /* height: 260px;
-    object-fit: cover; */
   }
+`
+const StyledFavorite = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 15px;
 `
 const Metadata = styled.div`
   align-items: center;

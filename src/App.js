@@ -14,6 +14,18 @@ class App extends Component {
     search: '',
     searchQuery: '',
     movies: [],
+    savedMovies: [],
+  }
+
+  getSavedMovies = () => {
+    const savedMovies = localStorage.getItem('savedMovies') || '{}';
+    const savedMoviesObj = (typeof savedMovies === 'string') ? JSON.parse(savedMovies) : {};
+    const savedMoviesArr = (savedMoviesObj && Object.keys(savedMoviesObj).length)
+      ? Object.keys(savedMoviesObj).map(key => savedMoviesObj[key]).filter(item => item.isSaved)
+      : []
+
+    // debugger;
+    this.setState({ savedMovies: savedMoviesArr });
   }
 
   /**
@@ -60,15 +72,26 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getSavedMovies();
     // test api
     // getMovie('tt3896198').then(data => {
     //   debugger;
     // })
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     Array.isArray(prevProps.savedMovies)
+  //     && Array.isArray(this.state.savedMovies)
+  //     && this.state.savedMovies.length !== prevProps.savedMovies) {
+  //     this.getSavedMovies();
+  //   }
+  // }
+
   render() {
     const {
       movies,
+      savedMovies,
       search,
       searchQuery,
       loading,
@@ -97,7 +120,14 @@ class App extends Component {
               <span>{searchQuery.length ? (
                 <span>No movies found for the term <b>{searchQuery}</b></span>
               ) : (
-                <span>Search for a movie</span>
+                <div>
+                  {savedMovies && savedMovies.length ? (
+                    <CardList list={savedMovies} />
+                  ) : (
+                    <span>Search for a movie</span>
+                  )}
+                </div>
+
               )}</span>
             )}
           </Section>

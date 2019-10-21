@@ -13,7 +13,7 @@ List of features to improve the app:
 * [x] ~~Move Header, Search and CardList into separated components~~;
 * [x] ~~Add tests for all components~~;
 * [x] ~~Use Styled Components for styling~~;
-* [ ] Allow users to save movies in a custom moviesList using localStorage;
+* [x] ~~Allow users to save movies in a custom moviesList using localStorage~~;
 * [ ] Allow users to login and save moviesList in a server database using Firebase;
 * [ ] Eject from CRA and optmize webpack;
 
